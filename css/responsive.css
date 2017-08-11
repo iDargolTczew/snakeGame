@@ -1,0 +1,29 @@
+@media(max-width: 767px){	
+
+#ul_nawigacja a {
+	display: block;
+	height: 50px;	
+	margin-left: 10px;
+	line-height: 50px;
+	color: #fff;
+	font-size: 24px;
+	text-align: center;
+    background: rgba(153,0,51,1)
+}
+
+.home ul li {
+    width: 50%;
+    font-size: 32px;
+}
+
+.home ul li > img {
+    margin-top: 5px;
+}
+}
+
+@media(min-width: 768px) and (max-width: 991px){
+	
+.home ul li {
+    width: 40%;  
+}
+}	

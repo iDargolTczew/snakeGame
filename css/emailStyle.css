@@ -1,0 +1,85 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2017-08-11, 23:59:13
+    Author     : dargol
+*/
+
+#formularz {
+        width:350px; /* ustawiamy szerokość formularza */
+        margin:0 auto; /* jeżeli nasz formularz ma ustawioną szerokość wyśrodkowujemy go */
+        background-color:#fff; /* dodajemy kolor tła naszemu formularzowi */
+        border:2px solid #ccc; /* dodajemy obramowanie o szerokości 2px */
+        border-radius:10px; /* zaokrąglamy tło naszego formularza */
+		padding:20px; /* dodajemy margines wewnątrz naszego formularza */
+        margin-top:20px; /* dodajemy margines górny naszego formularza */
+}
+
+#formularz label {
+    display:block;/* ustawiamy by label rozpoczynał się od nowej linii*/
+    margin-bottom:5px;/* dodajemy margines dolny */
+    font-weight:bold; /* pogrubiamy czcionkę */
+    /*text-transform: uppercase; /* zamieniamy wszystkie litery na duże */
+    font-size:12px; /* ustawiamy wielkość czcionki */
+    color:#555555; /* ustawiamy kolor czcionki */
+}
+
+#formularz textarea,
+#formularz input {
+	padding:5px; /* dodajemy margines wewnątrz naszego pola */
+	border-radius:3px; /* dodajemy zaokraglone rogi */
+	border:1px solid #ccc; /* dodajemy obramowanie */
+	margin-bottom:25px; /* dodajemy margines dolny */
+	width:245px; /* ustalamy szerokość */
+}
+
+#formularz input#submit {
+	width:155px; /* ustalamy szerokość */
+	cursor:pointer; /* zmieniamy kursor */
+	margin-bottom:0px;/* resetujemy margines dolny */
+}
+
+#formularz p.copy {
+	color:#555555; /* ustawiamy kolor czcionki */
+	margin-bottom:0px; /* resetujemy margines dolny */
+	font-size:12px; /* ustawiamy rozmiar czcionki */
+	text-align: center; /* wyśrodkowywujemy tekst */
+}
+
+#formularz p.copy a {
+	color:#555555;/* ustawiamy kolor czcionki */ 
+	text-decoration: none; /* usuwamy podkreślenie linku */
+	font-weight:bold; /* pogrubiamy czcionkę */
+}  
+
+input[type=submit]
+{
+	width: 155px;
+	background-color: #6B8E23;
+	font-size: 15px;
+	/*font-family: Arial;*/
+	color: white; /* font color */
+	/*padding: 5px 10px; /* os y x */
+	margin-top: 20px;
+	border: none; /* brak obramowania */
+	border-radius: 5px;
+	cursor: pointer; /* lapka */
+	letter-spacing: 1px; /* rozstrzelenie tekstu na submicie */
+	outline: none;
+}
+
+input[type=submit]:focus
+{
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9); /*<!-- webkit, m.in safari -->*/
+	-moz-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9); /*<!-- do mozilli -->*/
+	box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
+}
+
+input[type=submit]:hover /* najechanie na przycisk */
+{
+	background-color: #8ab82e; 
+	
+}
