@@ -237,6 +237,7 @@ function Start() {
                 if (that.snake.checkCanvasColision() === true || that.snake.snakeAlive === false)
                 {
                     clearInterval(that.intervalGame);
+                    context.clearRect(0, 0, 620, 620);
                     name = getCookie('name'); //sprzwdzam czy nick jest przechowywany w ciasteczku
                     
                     nickName=prompt('Koniec gry, zdobyłeś: '+that.points+' punktów.\nPodaj nick w celu zapisania wyniku(2-15 znaków, litery + cyfry): ', name);// 'username');
