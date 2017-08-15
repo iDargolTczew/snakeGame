@@ -25,7 +25,7 @@ class MainPage {
             require_once $this->active_page.".library.php";
             break; 
         
-            case 'test':
+            case 'wynik':
             require_once $this->active_page.".library.php";
             break; 
             

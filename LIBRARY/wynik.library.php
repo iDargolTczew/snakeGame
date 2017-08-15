@@ -10,9 +10,7 @@ echo '<div id="wrapper">';
 
 ModuleLoader::load('navbar');
 
-ModuleLoader::load('test');
-
-ModuleLoader::load('ladujtekst');
+ModuleLoader::load('wynik');
 
 ModuleLoader::load('footer');
 

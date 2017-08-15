@@ -19,7 +19,6 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'snakeGame');
 define('DB_LOGIN', 'root');
 define('DB_PASSWORD', 'root');
-
  
 // STAŁA DLA ADRESU I LOKALIZACJI APLIKACJI
 define('SERVER_ADDRESS', $NewURL);

@@ -99,12 +99,7 @@ class ModuleLoader {
                                             $i++;
                                         }
                                     echo '</tbody></table>';
-                                    
-                                echo 'Podaj swój nick w celu zapisania wyniku do rankingu: ';
-                                echo '<input name="nick" type="text" placeholder="podaj swój nick">';
-                                echo '<input id="submit" name="submitnick" type="submit" value="Zapisz">';
-            
-                    	echo '</div>
+                                echo '</div>
                         </div>   
                 </section>
             ';
@@ -128,42 +123,63 @@ class ModuleLoader {
                                 <textarea name="message" placeholder="Treść..."></textarea>
                                 <div class="g-recaptcha" data-sitekey="6LcwnCwUAAAAADuHV_Q2VHq0IMTL01Stgoz7LwCN"></div>
             
-                                <input id="submit" name="submit" type="submit" value="Wyślij">
+                                <input id="submit" disabled name="submit" type="submit" value="Wyślij">
         
                             </form>
-                         </div>
-                                        </br></br></br></br><b>To brzydkie jest tylko na testy :(</b></br>
-            				k.dargiewicz@icloud.com
-                                        </br>testowe przekierowanie na strone "test"</br>
-                                        <form action="test" method="POST">
-                                        <input type="text" name="test" placeholder="text"/>
-                                        <input type="submit" name="guzik" value="cisnij"/>
-                                        </form>
-                                        
+                         </div>                                        
                     </div>   
                 </section>
             ';
             break; 
         
-            case 'ladujtekst':
+            case 'wynik':
                 echo ' 
-                <section class="content home">  	
-                    <div class="container"> ';       
-                            echo 'TEST TEST TEST';
-                            if(isset($_POST['test']))
-                            {
-                                echo ' sesja dziala ';
+                <section class="content wynik">  	
+                    <div class="container"> 
+                        <h3>Twój wynik gry:</h3>';
+                            
+                            if(isset($_COOKIE['name']) && isset($_COOKIE['points'])){
+                                $nick = $_COOKIE['name'];
+                                $points = $_COOKIE['points'];
+                                $data = date('Y-m-d');
+                                
+                                
+                                echo 'Gracz '.$nick.' zdobył '.$points.' punktów. Twoje miejsce w rankingu:';
+                                $test = DatabaseManager::pdoAdd($nick, $points, $data);
+                                $result = DatabaseManager::getUsersList();
+                                
+                                echo '<table class="table table-bordered"><thead align="center"><tr class="info">';
+                                echo '<td>Miejsce</td><td>Nick gracza</td><td>Liczba zdobytych punktów</td><td>Data gry</td></tr></thead>';
+                                echo '<tbody>';
+                                    $i=1;
+                                    foreach($result as $row)
+                                        {
+                                            if($row['nick'] === $nick && $row['points'] === $points && $row['date'] === $data)
+                                            {
+                                                echo '<tr><td>'.$i.'</td><td>'.$row['nick'].'</td><td>'.$row['points'].'</td><td>'.$row['date'].'</td></tr>';
+                                                if($i === 1)
+                                                {
+                                                    echo ' <b>Gratulacje !!! Zająłeś pierwsze miejsce!</b>';
+                                                }
+                                                else if($i === 2)
+                                                {
+                                                    echo ' <b>Gratulacje !!! Zająłeś drugie miejsce!</b>';
+                                                }
+                                                else if($i === 3)
+                                                {
+                                                    echo ' <b>Gratulacje !!! Zająłeś trzecie miejsce!</b>';
+                                                }
+                                            }
+                                            $i++;
+                                        }
+                                    echo '</tbody></table>';
                             }
                             else{
-                                echo ' sesja nie hula ';
+                                echo "<b>Wystąpił błąd.</b>";
                             }
-                            $napis = $_POST['test'];
-                            echo $napis;
-                            echo '</br>kuniec napisu';
-                  
-                 echo '</div>   
+                        echo '</div> 
                 </section>';
-                 break;
+            break;
             
             case 'js':
                 echo '
@@ -186,20 +202,6 @@ class ModuleLoader {
                                     <canvas id="canvas" width="620" height="620">
                                         Twoja przeglądarka nie obsługuje elementu canvas!
                                     </canvas>                  
-                    	 </div>
-                  
-                    </div>   
-                </section>';
-                 break;
-             
-            case 'test':
-                echo ' 
-                <section class="content home">  	
-                    <div class="container">        
-                    	 <h3>TESTaaa</h3>     
-                         
-                         <div class="row">
-                            <b>TEST</b>
                     	 </div>
                   
                     </div>   

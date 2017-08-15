@@ -141,10 +141,40 @@ function Start() {
             context.drawImage(appleImg, this.x, this.y);
         };
     }//end function Apple
+    
+    function setCookie(name, val, days) {
+        if (days) {
+            var data = new Date();
+            data.setTime(data.getTime() + (days * 24*60*60*1000));
+            var expires = "; expires="+data.toGMTString();
+        } else {
+        var expires = "";
+        }
+        document.cookie = name + "=" + val + expires + "; path=/";
+        }//end setCookie
+        
+    function getCookie(name) {
+    if (document.cookie !== "") { //jeżeli document.cookie w ogóle istnieje
+        var cookies=document.cookie.split("; ");  //tworzymy z niego tablicę ciastek
+        for (var i=0; i<cookies.length; i++) { //i robimy po niej pętlę
+            var cookieName=cookies[i].split("=")[0]; //nazwa ciastka
+            var cookieVal=cookies[i].split("=")[1]; //wartość ciastka
+                if (cookieName===name) 
+                {
+                     return decodeURI(cookieVal); //jeżeli znaleźliśmy ciastko o danej nazwie, wtedy zwracamy jego wartość
+                }
+            }
+        }
+        else{
+            var nickname = 'username';
+            return nickname;
+        }
+    }//end getCookie
 
     function Game() {
         var that = this;
         var name = null;
+        //var username = getCookie('name');
 	this.nickReg = /^[a-zA-Z0-9]{2,15}$/; //wyrazenie regularne
         this.startImage = new Image();
         this.startImage.src = 'img/snake.png';
@@ -206,19 +236,23 @@ function Start() {
                 that.snake.checkAppleColision(that.x, that.y);
                 if (that.snake.checkCanvasColision() === true || that.snake.snakeAlive === false)
                 {
-                    nickName=prompt('Koniec gry, zdobyłeś: '+that.points+' punktów.\nPodaj nick w celu zapisania wyniku(2-15 znaków, litery + cyfry): ','username');
+                    clearInterval(that.intervalGame);
+                    name = getCookie('name'); //sprzwdzam czy nick jest przechowywany w ciasteczku
+                    
+                    nickName=prompt('Koniec gry, zdobyłeś: '+that.points+' punktów.\nPodaj nick w celu zapisania wyniku(2-15 znaków, litery + cyfry): ', name);// 'username');
                     if(nickName !== null)
                     {
-						if(that.nickReg.test(nickName)) //zastosowanie wyrazenia regularnego
-						{
-							name=nickName;
-						}
-						else
-						{
-							name="badname";
-						}
-                      window.location.href= 'gameSummary::drukuj?name='+name+'&points='+that.points;   
-                      clearInterval(that.intervalGame);
+                        if(that.nickReg.test(nickName)) //zastosowanie wyrazenia regularnego
+			{
+                            name=nickName;
+			}
+			else
+			{
+			name="badname";
+                        }
+                        setCookie('name', name);
+                        setCookie('points', that.points);
+                        window.location.href= 'wynik';   
                     }
                     else 
                     {

@@ -14,6 +14,7 @@ class DatabaseManager {
         try
         {   //connect succes
             $conn = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_LOGIN, DB_PASSWORD);
+            $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } 
         catch (PDOException $ex) 
         {
@@ -39,43 +40,17 @@ class DatabaseManager {
     }
 
     static public function pdoAdd($nick, $points, $data) {
-        $this->nick = $nick;
-        $this->points = $points;
-        $this->date = $data;
         
         $connect = self::connect();
+        
         $pdo = $connect->prepare('INSERT INTO results (nick, points, date) VALUES (:nick, :points, :date)');
-        $pdo->bindValue(':nick', $this->nick, PDO::PARAM_STR);
-        $pdo->bindValue(':points', $this->points, PDO::PARAM_STR);
-        $pdo->bindValue(':date', $this->date, PDO::PARAM_STR);
-        $pdo->execute();
+            $pdo->bindValue(':nick', $nick, PDO::PARAM_STR);
+            $pdo->bindValue(':points', $points, PDO::PARAM_INT);
+            $pdo->bindValue(':date', $data, PDO::PARAM_STR);
+            
+        $result = $pdo->execute();
+        
+        return $result;
     }//end of pdoAdd
-
-    static public function pdoQuery($email) {
-        if ($email === NULL) 
-        {
-            return false;
-        }
-        else 
-        {
-            $tab = [];
-            $i = 0;
-            
-            $connect = self::connect();
-            
-            $pdo = $connect->prepare('SELECT * FROM users WHERE email=:email');
-            $pdo->bindValue(':email', $email);
-            $pdo->execute();
-
-            while ($row = $pdo->fetch()) 
-            {
-                $tab[$i] = $row;
-                $i++;
-            }
-            $pdo->closeCursor();
-
-            return $tab; //return $tab array
-        }
-    }//end of pdoQuery
 
 }
