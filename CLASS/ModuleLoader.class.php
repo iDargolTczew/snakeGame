@@ -109,10 +109,9 @@ class ModuleLoader {
             echo '
                 <section class="content kontakt">  	
                     <div class="container">        
-                    	 <h3>Skontaktuj się ze mną:</h3>         
-                         
-                         <div id="formularz">
-                            <form>        
+                    	 <h3>Skontaktuj się ze mną:</h3>   
+                            <div id="formularz">
+                             <form action="mail" method="POST">        
                                 <label>Podaj imię i nazwisko</label>
                                 <input type="text" name="name" placeholder="imię i nazwisko">
             
@@ -121,12 +120,49 @@ class ModuleLoader {
             
                                 <label>Treść wiadomości</label>
                                 <textarea name="message" placeholder="Treść..."></textarea>
-                                <div class="g-recaptcha" data-sitekey="6LcwnCwUAAAAADuHV_Q2VHq0IMTL01Stgoz7LwCN"></div>
+                                <div class="g-recaptcha" data-sitekey="*******************"></div>
             
-                                <input id="submit" disabled name="submit" type="submit" value="Wyślij">
+                                <input id="submit" name="submit" type="submit" value="Wyślij">
         
-                            </form>
+                             </form>
                          </div>                                        
+                    </div>   
+                </section>
+            ';
+            break; 
+        
+            case 'mail':
+            echo '
+                <section class="content mail">  	
+                    <div class="container">';
+                
+                            require_once 'autoload.php'; //dotyczy captcha
+                            $secret = '**************';
+                            //weryfikacja captcha
+                            if(isset($_POST['g-recaptcha-response']))
+                            {
+                                //Tworzymy obiekt wykorzystując w tym celu nasz klucz prywatny zdefiniowany wcześniej
+                                $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+                                //za pomocą stworzonego obiektu wysyłany otrzymane dane do Google i otrzymany wynik przypisujemy do zmiennej
+                                $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+                                
+                                if($resp->isSuccess())
+                                {
+                                    echo '<h2>Sukces!</h2><p>Wiadomość została wysłana.</p>';
+                                    $username = $_POST['name'];
+                                    $emailAdress = $_POST['email'];
+                                    $message = $_POST['message'];
+                                   
+                                    // użycie funkcji mail
+                                    mail($emailAdress, $username, $message);
+                                }
+                                else
+                                {
+                                    echo '<h2>Coś poszło nie tak </h2><p>Wygląda na to że jesteś botem :(</p>';
+                                }
+                            }
+                            
+                        echo '</div>                                        
                     </div>   
                 </section>
             ';

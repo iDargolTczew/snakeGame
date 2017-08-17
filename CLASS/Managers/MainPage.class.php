@@ -28,6 +28,10 @@ class MainPage {
             case 'wynik':
             require_once $this->active_page.".library.php";
             break; 
+        
+            case 'mail':
+            require_once $this->active_page.".library.php";
+            break; 
             
         }
         
