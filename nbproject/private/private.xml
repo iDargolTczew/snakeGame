@@ -4,6 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Applications/MAMP/htdocs/snakeDargolGitHub/index.php</file>
+            <file>file:/Applications/MAMP/htdocs/snakeDargolGitHub/CLASS/Managers/MainPage.class.php</file>
+            <file>file:/Applications/MAMP/htdocs/snakeDargolGitHub/LIBRARY/kontakt.library.php</file>
+            <file>file:/Applications/MAMP/htdocs/snakeDargolGitHub/js/snakeJavascript.js</file>
+            <file>file:/Applications/MAMP/htdocs/snakeDargolGitHub/CLASS/ModuleLoader.class.php</file>
+            <file>file:/Applications/MAMP/htdocs/snakeDargolGitHub/LIBRARY/mail.library.php</file>
+            <file>file:/Applications/MAMP/htdocs/snakeDargolGitHub/CLASS/autoload.php</file>
         </group>
     </open-files>
 </project-private>

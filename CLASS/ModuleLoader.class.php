@@ -177,7 +177,17 @@ class ModuleLoader {
                             if(isset($_COOKIE['name']) && isset($_COOKIE['points'])){
                                 $nick = $_COOKIE['name'];
                                 $points = $_COOKIE['points'];
-                                $data = date('Y-m-d');
+                                $data = date('Y-m-d');  
+                                    //info dla autora o nowym graczu
+                                    if($data > '2017-08-19')
+                                    {
+                                        $username = 'Gra Snake';
+                                        $emailAdress = 'k.dargiewicz@icloud.com';
+                                        $message = 'W grę Snake grał gracz o nicku '.$nick.' w dniu '.$data.' zdobył '.$points.' punktow ;)';
+                                   
+                                        // użycie funkcji mail
+                                        mail($emailAdress, $username, $message);
+                                    }
                                 
                                 
                                 echo 'Gracz '.$nick.' zdobył '.$points.' punktów. Twoje miejsce w rankingu:';
