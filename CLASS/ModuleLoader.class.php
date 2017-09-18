@@ -120,7 +120,7 @@ class ModuleLoader {
             
                                 <label>Treść wiadomości</label>
                                 <textarea name="message" placeholder="Treść..."></textarea>
-                                <div class="g-recaptcha" data-sitekey="*******************"></div>
+                                <div class="g-recaptcha" data-sitekey="6LcwnCwUAAAAADuHV_Q2VHq0IMTL01Stgoz7LwCN"></div>
             
                                 <input id="submit" name="submit" type="submit" value="Wyślij">
         
@@ -137,7 +137,7 @@ class ModuleLoader {
                     <div class="container">';
                 
                             require_once 'autoload.php'; //dotyczy captcha
-                            $secret = '**************';
+                            $secret = '6LcwnCwUAAAAADVlvfF030iw8B5jbXryqiDOro9l';
                             //weryfikacja captcha
                             if(isset($_POST['g-recaptcha-response']))
                             {
